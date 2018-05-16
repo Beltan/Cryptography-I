@@ -5,29 +5,8 @@ Our goal in this project is to build a file authentication system that lets brow
 
 The final hash value h0 – a hash of the first block with its appended hash – is distributed to users via the authenticated channel as above.
 
-Now, a browser downloads the file F one block at a time, where each block includes the appended hash value from the diagram above. When the first block (B0 || h1) is received the browser checks that H(B0 || h1) is equal to h0 and if so it begins playing the first video block. When the second block (B1 || h2) is received the browser checks that H(B1 || h2) is equal to h1
-1
-​	  and if so it plays this second block. This process continues until the very last block. This way each block is authenticated and played as it is received and there is no need to wait until the entire file is downloaded.
+Now, a browser downloads the file F one block at a time, where each block includes the appended hash value from the diagram above. When the first block (B0 || h1) is received the browser checks that H(B0 || h1) is equal to h0 and if so it begins playing the first video block. When the second block (B1 || h2) is received the browser checks that H(B1 || h2) is equal to h1 and if so it plays this second block. This process continues until the very last block. This way each block is authenticated and played as it is received and there is no need to wait until the entire file is downloaded.
 
-It is not difficult to argue that if the hash function HH is collision resistant then an attacker cannot modify any of the video blocks without being detected by the browser. Indeed, since h_0 = H(B_0 \ \big\|\ h_1)h 
-0
-​	 =H(B 
-0
-​	   
-∥
-∥
-​	  h 
-1
-​	 ) an attacker cannot find a pair (B′0,h′1)≠(B0,h1) such that h0=H(B′0 ∥∥ h′1) since this would break collision resistance of HH. Therefore after the first hash check the browser is convinced that both B_0B 
-0
-​	  and h_1h 
-1
-​	  are authentic. Exactly the same argument proves that after the second hash check the browser is convinced that both B_1B 
-1
-​	  and h_2h 
-2
-​	  are authentic, and so on for the remaining blocks.
+It is not difficult to argue that if the hash function HH is collision resistant then an attacker cannot modify any of the video blocks without being detected by the browser. Indeed, since h0 = H(B0 || h1) an attacker cannot find a pair (B0', h1') ≠ (B0, h1) such that h0 = H(B0' || h1') since this would break collision resistance of H. Therefore after the first hash check the browser is convinced that both B0 and h1 are authentic. Exactly the same argument proves that after the second hash check the browser is convinced that both B1 and h2 are authentic, and so on for the remaining blocks.
 
-Your task is to write code to compute the hash h_0h 
-0
-​	  of a given file FF and to verify blocks of FF as they are received by the client.
+Your task is to write code to compute the hash h0 of a given file F and to verify blocks of F as they are received by the client.
