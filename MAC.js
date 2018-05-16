@@ -44,8 +44,13 @@ function getVideo(hash, blocks) {
     for (var i = 0; i < blocks.length; i++) {
         newHash = sha256.hex(blocks[i]);
         if (newHash == nextHash) {
-            nextHashBytes = Buffer.from(blocks[i + 1])
-            nexthash = fromBytes(nextHashBytes.slice(nextHashBytes.length - 32, nextHashBytes.length));
+            if (i == blocks.length - 1) {
+                console.log('File integrity ok');
+                return 1;
+            } else {
+                nextHashBytes = Buffer.from(blocks[i + 1])
+                nexthash = fromBytes(nextHashBytes.slice(nextHashBytes.length - 32, nextHashBytes.length));
+            }
         } else {
             console.log('File corrupted');
             return 0;
@@ -65,4 +70,4 @@ function fromBytes(bytes) {
 
 var blocks = readFile(fileName);
 var hash = getHash(blocks);
-var Video = getVideo(hash, blocks);
+var video = getVideo(hash, blocks);
