@@ -55,3 +55,7 @@ It is not difficult to argue that if the hash function HH is collision resistant
 ​	  and h_2h 
 2
 ​	  are authentic, and so on for the remaining blocks.
+
+Your task is to write code to compute the hash h_0h 
+0
+​	  of a given file FF and to verify blocks of FF as they are received by the client.
