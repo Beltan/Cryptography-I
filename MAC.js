@@ -41,14 +41,24 @@ function getVideo(hash, blocks) {
     var nextHash = hash;
     var newHash = undefined;
     for (var i = 0; i < blocks.length; i++) {
-        newHash = sha256.array(blocks[i]);
-        for (var j = 0; j < nextHash.length; j++) {
-            if (newHash[j] === nextHash[j]) {
-            } else {
-                console.log('File corrupted')
-            }
+        newHash = sha256.hex(blocks[i]);
+        if (newHash == nextHash) {
+            nexthash = fromBytes(Buffer.from(blocks[i + 1]));
+        } else {
+            console.log('File corrupted');
+            return 0;
         }
     }
+}
+
+function fromBytes(bytes) {
+    var Hex = '0123456789abcdef';
+    var result = [];
+    for (var i = 0; i < bytes.length; i++) {
+        var v = bytes[i];
+        result.push(Hex[(v & 0xf0) >> 4] + Hex[v & 0x0f]);
+    }
+    return result.join('');
 }
 
 var blocks = readFile(fileName);
