@@ -40,10 +40,12 @@ function getHash(blocks) {
 function getVideo(hash, blocks) {
     var nextHash = hash;
     var newHash = undefined;
+    var nextHashBytes = undefined;
     for (var i = 0; i < blocks.length; i++) {
         newHash = sha256.hex(blocks[i]);
         if (newHash == nextHash) {
-            nexthash = fromBytes(Buffer.from(blocks[i + 1]));
+            nextHashBytes = Buffer.from(blocks[i + 1])
+            nexthash = fromBytes(nextHashBytes.slice(nextHashBytes.length - 32, nextHashBytes.length));
         } else {
             console.log('File corrupted');
             return 0;
