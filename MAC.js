@@ -34,7 +34,7 @@ function getHash(blocks) {
             hash = sha256.array(blocks[i]);
         }
     }
-    return hash;
+    return hashHex;
 }
 
 function getVideo(hash, blocks) {
@@ -48,8 +48,8 @@ function getVideo(hash, blocks) {
                 console.log('File integrity ok');
                 return 1;
             } else {
-                nextHashBytes = Buffer.from(blocks[i + 1])
-                nexthash = fromBytes(nextHashBytes.slice(nextHashBytes.length - 32, nextHashBytes.length));
+                nextHashBytes = Buffer.from(blocks[i]);
+                nextHash = fromBytes(nextHashBytes.slice(nextHashBytes.length - 32, nextHashBytes.length));
             }
         } else {
             console.log('File corrupted');
