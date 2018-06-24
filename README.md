@@ -1,2 +1,2 @@
 # Cryptography-I
-Cryptography I from Coursera - Standford University
+Cryptography I from Coursera - Stanford University
